@@ -165,6 +165,15 @@ public class IndentAction extends TextEditorAction {
 						((IScriptFormatterExtension) formatter)
 								.initialize(project);
 					}
+					
+					ISourceModule sourceModule = EditorUtility
+							.getEditorInputModelElement(getTextEditor(), true);
+					if (sourceModule != null
+							&& formatter instanceof IScriptFormatterExtension2) {
+						((IScriptFormatterExtension2) formatter)
+								.initialize(sourceModule);
+					}
+					
 					final Position end = new Position(offset + length);
 					document.addPosition(end);
 					if (indentLines(document, startLine, lastLine, formatter)) {
